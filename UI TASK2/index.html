@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Responsive Single Page</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', sans-serif;
+    }
+
+    body {
+      color: #333;
+      line-height: 1.6;
+    }
+
+    .navbar {
+      background-color: #222;
+      color: #fff;
+      padding: 15px 30px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: relative;
+    }
+
+    .logo {
+      font-size: 24px;
+      font-weight: bold;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 20px;
+      list-style: none;
+    }
+
+    .nav-links li a {
+      color: white;
+      text-decoration: none;
+      cursor: pointer;
+    }
+
+    .nav-links li a:hover {
+      color: #f39c12;
+    }
+
+    .menu-icon {
+      display: none;
+      font-size: 26px;
+      cursor: pointer;
+      color: white;
+    }
+
+    .page {
+      display: none;
+      padding: 100px 20px;
+      text-align: center;
+      min-height: 60vh;
+    }
+
+    #homePage {
+      background: linear-gradient(to right, #ffecd2, #fcb69f);
+    }
+
+    #aboutPage {
+      background: linear-gradient(to right, #c2e9fb, #a1c4fd);
+    }
+
+    .page h1 {
+      font-size: 2.5rem;
+      margin-bottom: 20px;
+    }
+
+    .page p {
+      font-size: 1.2rem;
+      margin-bottom: 30px;
+    }
+
+    footer {
+      background-color: #222;
+      color: white;
+      text-align: center;
+      padding: 20px;
+    }
+
+    @media (max-width: 768px) {
+      .nav-links {
+        flex-direction: column;
+        position: absolute;
+        top: 60px;
+        left: 0;
+        background-color: #222;
+        width: 100%;
+        display: none;
+        padding: 20px 0;
+      }
+
+      .nav-links li {
+        text-align: center;
+        padding: 10px 0;
+      }
+
+      .menu-icon {
+        display: block;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <nav class="navbar">
+      <div class="logo">MySite</div>
+      <ul class="nav-links" id="navLinks">
+        <li><a onclick="showPage('home')">Home</a></li>
+        <li><a onclick="showPage('about')">About</a></li>
+      </ul>
+      <div class="menu-icon" onclick="toggleMenu()">☰</div>
+    </nav>
+  </header>
+
+  <section id="homePage" class="page">
+    <h1>Welcome to the Home Page</h1>
+    <p>This is the first section of our responsive single-page website.</p>
+  </section>
+
+  <section id="aboutPage" class="page">
+    <h1>About Us</h1>
+    <p>This is the second section of our responsive site, describing more about us.</p>
+  </section>
+
+  <footer>
+    <p>&copy; 2025 MySite. All rights reserved.</p>
+  </footer>
+
+  <script>
+    function toggleMenu() {
+      const nav = document.getElementById("navLinks");
+      nav.style.display = nav.style.display === "flex" ? "none" : "flex";
+    }
+
+    function showPage(page) {
+      document.getElementById("homePage").style.display = "none";
+      document.getElementById("aboutPage").style.display = "none";
+
+      if (page === "home") {
+        document.getElementById("homePage").style.display = "block";
+      } else if (page === "about") {
+        document.getElementById("aboutPage").style.display = "block";
+      }
+
+      // Hide mobile nav menu after selection (if visible)
+      if (window.innerWidth <= 768) {
+        document.getElementById("navLinks").style.display = "none";
+      }
+    }
+
+    // Show home page by default
+    window.onload = () => showPage('home');
+  </script>
+
+</body>
+</html>
